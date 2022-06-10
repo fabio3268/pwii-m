@@ -16,4 +16,11 @@ $doctor = new \Source\Hospital\Doctor(
     "Oncologista"
 );
 
-var_dump($doctor);
+$patient = new \Source\Records\Patient(
+    "José",
+    "jose@gmail.com",
+    "asdfgfyguhj",
+    "12/12/1980"
+);
+
+var_dump($doctor,$patient);
