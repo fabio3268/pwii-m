@@ -20,6 +20,9 @@ $company = new \Source\Records\Company(
 
 // Agregação
 $company->addService($serv01);
+$company->addService($serv01);
+$company->addService($serv01);
+$company->addService($serv02);
 $company->addService($serv02);
 //ou de forma aternativa
 $company->addService(new \Source\Records\Services(
