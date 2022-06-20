@@ -49,6 +49,9 @@ class Address
         $this->number = $number;
     }
 
-
+    public function show() : string
+    {
+        return "{$this->street}, {$this->getNumber()}";
+    }
 
 }

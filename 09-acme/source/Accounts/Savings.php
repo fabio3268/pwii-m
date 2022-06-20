@@ -28,6 +28,11 @@ class Savings extends Account
         $this->dtBith = $dtBith;
     }
 
-
+    public function show(): string
+    {
+        return "<p>Número da conta poupança: {$this->number}</p>" .
+               "<p>Saldo: {$this->balance}</p>" .
+               "<p>Dt. Aniversário: {$this->dtBith}</p>";
+    }
 
 }
