@@ -21,13 +21,17 @@ try {
         ]
     );
 
-    $stmt = $pdo->query("SELECT * FROM users LIMIT 3");
+    //var_dump($pdo);
+
+    $stmt = $pdo->query("SELECT * FROM users");
 
     while ($user = $stmt->fetch(PDO::FETCH_ASSOC)){ // mode do fetch PDO::FETCH_ASSOC
+        echo "<p>Nome: {$user["name"]}</p>";
         var_dump($user);
     }
 
 } catch (PDOException $exception) {
     var_dump($exception);
     echo "<p>{$exception->getMessage()}</p>";
+    echo "Estamos em manutenção, volte mais tarde!";
 }

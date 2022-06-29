@@ -32,7 +32,6 @@ class Connect
                 echo "Problemas ao Conectar...";
             }
         }
-
         return self::$instance;
     }
 
