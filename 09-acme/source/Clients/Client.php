@@ -19,20 +19,12 @@ class Client
     private $checking;
     private $product;
 
-    /**
-     * @param string|null $name
-     * @param string|null $email
-     * @param string|null $password
-     * @param string|null $dtBorn
-     * @param Address|null $address
-     * O ? no início de cada var, indica que o valor da mesma pode ser NULL
-     */
     public function __construct(
         ?string $name = NULL,
         ?string $email= NULL,
         ?string $password = NULL,
         ?string $dtBorn = NULL,
-        Address $address = NULL
+        ?Address $address = NULL
     )
     {
         $this->name = $name;
@@ -161,6 +153,7 @@ class Client
          * define a query com parâmetros :name, :email, :password :dtBorn, cada um deles vai ser substituido
          * com a utilização do método ->bindParm
          */
+        //INSERT INTO clients VALUES (NULL, 'Fábio', 'fabio@gmail.com','1234','1976-02-12',NULL, NULL);
         $query = "INSERT INTO clients VALUES (NULL, :name, :email,:password,:dtBorn,NULL, NULL)";
         /**
          * utilizar o método ->prepare, para criar um objeto PDOStatement, que prepara a query antes
@@ -170,8 +163,6 @@ class Client
         /**
          * Substituição de cada um dos parâmetros por seus repectivos valores
          */
-
-        var_dump($stmt);
 
         $stmt->bindParam(":name",$this->name);
         $stmt->bindParam(":email",$this->email);
@@ -183,7 +174,8 @@ class Client
          * mesmo utilizando a $stmt para incluir o registro, quem tem o valor do último registro
          * incluído é a Connect
          */
-        var_dump(Connect::getInstance()->lastInsertId());
+        //var_dump(Connect::getInstance()->lastInsertId());
+        $this->address->insert(Connect::getInstance()->lastInsertId());
 
     }
 
@@ -205,5 +197,31 @@ class Client
             $this->password = $client->password;
             $this->dtBorn = $client->dtBorn;
         }
+    }
+
+    public function validate(string $email, string $password)
+    {
+        // SELECT * FROM clients WHERE email LIKE 'fabiosantos@ifsul.edu.br' AND password LIKE '234567854654';
+        $query = "SELECT * FROM clients WHERE email LIKE :email AND password LIKE :password";
+        $stmt = Connect::getInstance()->prepare($query);
+
+        $stmt->bindParam(":email",$email);
+        $stmt->bindParam(":password",$password);
+
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1){
+            echo "Encontrei!";
+            $client = $stmt->fetch();
+            $this->name = $client->name;
+            $this->email = $client->email;
+            $this->password = $client->password;
+            $this->dtBorn = $client->dtBorn;
+        }
+        else {
+            echo "Não encontrei!";
+        }
+
+
     }
 }
