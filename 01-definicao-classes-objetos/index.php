@@ -8,9 +8,9 @@ $user = new User();
 var_dump($user);
 
 // Acessa os atributos
-$user->name = "Fábio";
-$user->email = "fabiosantos@ifsul.edu.br";
+//$user->name = "Fábio";
+//$user->email = "fabiosantos@ifsul.edu.br";
 var_dump($user);
 
 // Imprime o conteúdo dos atributos
-echo "Nome: {$user->name} Email {$user->email}";
+//echo "Nome: {$user->name} Email {$user->email}";
