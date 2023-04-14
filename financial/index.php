@@ -10,10 +10,13 @@ $address = new Address("Rua A","1212", "Ap 12");
 var_dump($address);
 
 $user = new User("Fábio","fabio@email.com","234567", $address);
-var_dump($user);
+
 
 $savings01 = new Savings("12345","400.000","01/01");
 $savings02 = new Savings("34564","400.000","01/01");
 
 $user->addSavings($savings01);
 $user->addSavings($savings02);
+
+var_dump($user);
+

@@ -52,7 +52,7 @@ class User {
 
     public function addSavings (Savings $savings){
         $this->savings[] = $savings;
-        var_dump($this->savings);
+        //var_dump($this->savings);
     }
 
 }
