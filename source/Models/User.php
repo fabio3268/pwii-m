@@ -55,4 +55,12 @@ class User {
         //var_dump($this->savings);
     }
 
+    public function selectAll ()
+    {
+        $query = "SELECT * FROM users";
+        $stmt = Connect::getInstance()->query($query);
+        $stmt->execute();
+        var_dump($stmt->fetchAll());
+    }
+
 }

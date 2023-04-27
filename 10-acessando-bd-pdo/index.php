@@ -7,9 +7,13 @@ require __DIR__ . "/../source/Boot/Config.php";
 
 use Source\Models\User;
 use Source\Core\Connect;
-
+/*
 $query = "SELECT * FROM users";
 $stmt = Connect::getInstance()->prepare($query);
 $stmt->execute();
 var_dump($stmt->fetchAll());
+*/
+
+$user = new User();
+$user->selectAll();
 
