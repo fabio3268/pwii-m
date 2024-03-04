@@ -1,7 +1,8 @@
 <?php
 
-namespace Source\Models;
-class User {
+#[AllowDynamicProperties]
+class User // extends stdClass
+{
     private $name;
     private $email;
 
@@ -30,6 +31,5 @@ class User {
     {
         $this->email = $email;
     }
-
 
 }
