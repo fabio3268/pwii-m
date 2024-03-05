@@ -3,7 +3,7 @@
 require __DIR__ . "/../source/User.php";
 
 $user = new User();
-$user->setName("Fábio Santos");
+$user->setName(NULL);
 $user->setEmail("fabiosantos@ifsul.edu.br");
 
 echo "<div>Meu nome é {$user->getName()}</div>";

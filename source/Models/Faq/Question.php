@@ -2,7 +2,7 @@
 
 namespace Source\Models\Faq;
 
-class Question {
+class Question extends stdClass {
     private $id;
     private $idType;
     private $question;
