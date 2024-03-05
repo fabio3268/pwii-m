@@ -1,7 +1,6 @@
 <?php
 
-#[AllowDynamicProperties]
-class User // extends stdClass
+class User extends stdClass
 {
     private $name;
     private $email;
