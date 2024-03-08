@@ -18,6 +18,8 @@ class Doctor extends User
     )
     {
         parent::__construct($id, $name, $email, $password);
+        $this->crm = $crm;
+        $this->especiality = $especiality;
     }
 
     public function getCrm(): ?string

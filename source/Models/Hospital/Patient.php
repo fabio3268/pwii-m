@@ -18,6 +18,8 @@ class Patient extends User
     )
     {
         parent::__construct($id, $name, $email, $password);
+        $this->dateBirth = $dateBirth;
+        $this->medicalRecords = $medicalRecords;
     }
 
     public function getDateBirth(): ?string

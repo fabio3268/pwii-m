@@ -23,5 +23,5 @@ $patient = new Patient(
 );
 
 var_dump($doctor->getEmail());
-var_dump($patient);
+var_dump($patient->getDateBirth());
 
