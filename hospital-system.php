@@ -22,6 +22,6 @@ $patient = new Patient(
     "Texto para o prontuário"
 );
 
-var_dump($doctor->getEmail());
-var_dump($patient->getDateBirth());
+var_dump($doctor);
+var_dump($patient);
 
