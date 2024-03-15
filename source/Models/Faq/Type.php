@@ -1,8 +1,9 @@
 <?php
 
 namespace Source\Models\Faq;
-use stdClass;
-class Type extends stdClass {
+class Type {
     private $id;
     private $description;
+
+
 }
