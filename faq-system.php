@@ -7,12 +7,28 @@ require __DIR__ . "/source/autoload.php";
 use Source\Models\User;
 use Source\Models\Faq\Question;
 use Source\Models\Faq\Type;
+use Source\Core\Connect;
 
-$user = new User();
-var_dump($user);
+$conn = Connect::getInstance();
+//var_dump($conn);
+$query = "SELECT * FROM questions";
+$result = $conn->query($query);
+//var_dump($result);
+$listQuestions = $result->fetchAll();
+//var_dump($listQuestions);
+foreach ($listQuestions as $question){
+    echo $question->question . "<br>";
+    echo $question->answer . "<br>";
+}
+//while ($row = $result->fetch()){
+//    echo $row->question . "<br>";
+//}
 
-$question = new Question();
-var_dump($question);
+//$user = new User();
+//var_dump($user);
 
-$type = new Type();
-var_dump($type);
+//$question = new Question();
+//var_dump($question);
+
+//$type = new Type();
+//var_dump($type);
