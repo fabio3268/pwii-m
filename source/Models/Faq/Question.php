@@ -68,10 +68,11 @@ class Question {
         $this->answer = $answer;
     }
 
-    public function selectAll ()
+    public function selectAll (): ?array
     {
         $conn = Connect::getInstance();
-        $query = "SELECT * FROM questions";
+        $query = "SELECT * 
+                  FROM questions";
         $result = $conn->query($query);
         return $result->fetchAll();
     }
