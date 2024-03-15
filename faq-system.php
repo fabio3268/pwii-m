@@ -39,5 +39,5 @@ if($listQuestions) {
     echo "Vazio..";
 }
 
-//$type = new Type();
-//var_dump($type);
+$type = new Type();
+var_dump($type->selectAll());

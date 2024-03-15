@@ -3,7 +3,9 @@
 namespace Source\Models\Faq;
 
 use Source\Core\Connect;
-class Question {
+use Source\Core\Model;
+
+class Question extends Model {
     private $id;
     private $idType;
     private $question;
@@ -26,6 +28,8 @@ class Question {
         $this->idType = $idType;
         $this->question = $question;
         $this->answer = $answer;
+        $this->entity = "questions";
+
     }
 
     public function getId(): ?int
@@ -68,13 +72,13 @@ class Question {
         $this->answer = $answer;
     }
 
-    public function selectAll (): ?array
+    /*public function selectAll (): ?array
     {
         $conn = Connect::getInstance();
         $query = "SELECT * 
                   FROM questions";
         $result = $conn->query($query);
         return $result->fetchAll();
-    }
+    }*/
 
 }
