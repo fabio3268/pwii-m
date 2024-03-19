@@ -45,7 +45,8 @@ var_dump($type->selectAll());*/
 $question = new Question(
     null,
     "2",
-    "Questão teste"
+    "Questão teste",
+    "Resposta teste"
 );
 
 $questionInsert = $question->insert();

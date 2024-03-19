@@ -32,7 +32,7 @@ abstract class Model
                   WHERE id = {$id}";
         return $conn->query($query)->fetchAll();
     }
-   public function insert(): ?int
+    public function insert(): ?int
     {
         $values = get_object_vars($this);// pegar os valores dos atributos e inserir em um arra
         array_shift($values);
