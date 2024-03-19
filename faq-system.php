@@ -45,7 +45,9 @@ var_dump($type->selectAll());*/
 $question = new Question(
     null,
     "2",
-    "Questão teste",
-    "Resposeta teste"
+    "Questão teste"
 );
-$question->insert();
+
+$questionInsert = $question->insert();
+
+echo $question->getMessage() . " - " . $questionInsert;

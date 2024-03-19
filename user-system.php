@@ -17,8 +17,9 @@ use Source\Models\User;
 //    echo $user->getMessage();
 //}
 
-$user = new User();
+/*$user = new User();
 if($user->login("fabiosantos@ifsul.edu.br", "12345678")) {
     var_dump($user);
 }
-echo $user->getMessage();
+echo $user->getMessage();*/
+

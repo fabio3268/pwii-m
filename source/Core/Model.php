@@ -2,10 +2,20 @@
 
 namespace Source\Core;
 
+use PDO;
+use PDOException;
+
 abstract class Model
 {
 
     protected $entity;
+
+    private $massage;
+
+    public function getMessage(): ?string
+    {
+        return $this->massage;
+    }
 
     public function selectAll (): ?array
     {
@@ -14,7 +24,7 @@ abstract class Model
         return $conn->query($query)->fetchAll();
     }
 
-    public function selectById (int $id)
+    public function selectById (int $id): ?array
     {
         $conn = Connect::getInstance();
         $query = "SELECT * 
@@ -22,19 +32,31 @@ abstract class Model
                   WHERE id = {$id}";
         return $conn->query($query)->fetchAll();
     }
-/*    public function insert()
+   public function insert(): ?int
     {
         $values = get_object_vars($this);// pegar os valores dos atributos e inserir em um arra
         array_shift($values);
+        array_shift($values);
 
-        foreach ($values as $value => $key){
-            $values[$key] = "'$value'";
+        foreach ($values as $key => $value){
+            echo "{$value} => {$key} <br>";
+            $values[$key] = is_null($value) ? "NULL" : "'{$value}'";
         }
-        $values["id"] = "NULL";
+
         $valuesString = implode(",", $values);
 
+        $conn = Connect::getInstance();
         $query = "INSERT INTO {$this->entity} VALUES ({$valuesString})";
-        var_dump($query);
-    }*/
+
+        try {
+            $result = $conn->query($query);
+            $this->massage = "Registro inserido com sucesso!";
+            return $result ? $conn->lastInsertId() : null;
+        } catch (PDOException $exception) {
+            $this->massage = "Erro ao inserir: {$exception->getMessage()}";
+            return false;
+        }
+
+    }
 
 }
