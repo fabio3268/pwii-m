@@ -27,7 +27,7 @@ use Source\Core\Connect;
 //$user = new User();
 //var_dump($user);
 
-$questions = new Question();
+/*$questions = new Question();
 $listQuestions = $questions->selectAll();
 if($listQuestions) {
     foreach ($listQuestions as $question){
@@ -40,4 +40,12 @@ if($listQuestions) {
 }
 
 $type = new Type();
-var_dump($type->selectAll());
+var_dump($type->selectAll());*/
+
+$question = new Question(
+    null,
+    "2",
+    "Questão teste",
+    "Resposeta teste"
+);
+$question->insert();

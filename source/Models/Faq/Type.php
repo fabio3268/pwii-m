@@ -8,10 +8,6 @@ class Type extends Model {
     private $id;
     private $description;
 
-    /**
-     * @param $id
-     * @param $description
-     */
     public function __construct(
         int $id = null,
         string $description = null

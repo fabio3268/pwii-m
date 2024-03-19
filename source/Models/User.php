@@ -1,11 +1,15 @@
 <?php
 
 namespace Source\Models;
+
+use PDOException;
+use Source\Core\Connect;
 class User {
     private $id;
     private $name;
     private $email;
     private $password;
+    private $message;
 
     public function __construct(
         int $id = null,
@@ -50,7 +54,7 @@ class User {
         $this->email = $email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -60,6 +64,53 @@ class User {
         $this->password = $password;
     }
 
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
 
+    public function insert(): ?int
+    {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $conn = Connect::getInstance();
+        $query = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
+        try {
+            $stmt->execute();
+            return $conn->lastInsertId();
+        } catch (PDOException) {
+            $this->message = "Por favor, informe todos os campos!";
+            return null;
+        }
+    }
+
+    public function login(string $email, string $password): bool
+    {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $conn = Connect::getInstance();
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        if (!$result) {
+            $this->message = "E-mail não cadastrado!";
+            return false;
+        }
+
+        if (!password_verify($password, $result->password)) {
+            $this->message = "Senha incorreta!";
+            return false;
+        }
+
+        $this->setId($result->id);
+        $this->setName($result->name);
+        $this->setEmail($result->email);
+
+        return true;
+    }
 
 }

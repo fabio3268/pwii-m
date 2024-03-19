@@ -6,10 +6,10 @@ use Source\Core\Connect;
 use Source\Core\Model;
 
 class Question extends Model {
-    private $id;
-    private $idType;
-    private $question;
-    private $answer;
+    protected $id;
+    protected $idType;
+    protected $question;
+    protected $answer;
 
     /**
      * @param $id
@@ -72,13 +72,5 @@ class Question extends Model {
         $this->answer = $answer;
     }
 
-    /*public function selectAll (): ?array
-    {
-        $conn = Connect::getInstance();
-        $query = "SELECT * 
-                  FROM questions";
-        $result = $conn->query($query);
-        return $result->fetchAll();
-    }*/
 
 }
