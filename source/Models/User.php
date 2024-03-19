@@ -71,19 +71,35 @@ class User {
 
     public function insert(): ?int
     {
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+
         $conn = Connect::getInstance();
-        $query = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+
+        $query = "SELECT * FROM users WHERE email LIKE :email";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1) {
+            $this->message = "E-mail já cadastrado!";
+            return false;
+        }
+
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+
+        $query = "INSERT INTO users (name, email, password) 
+                  VALUES (:name, :email, :password)";
+
         $stmt = $conn->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
+
         try {
             $stmt->execute();
             return $conn->lastInsertId();
         } catch (PDOException) {
             $this->message = "Por favor, informe todos os campos!";
-            return null;
+            return false;
         }
     }
 
@@ -110,7 +126,10 @@ class User {
         $this->setName($result->name);
         $this->setEmail($result->email);
 
+        $this->message = "Usuário logado com sucesso!";
+
         return true;
+
     }
 
 }
