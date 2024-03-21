@@ -2,7 +2,7 @@
 
 namespace Source\Core;
 // depois retirar a linha abaixo
-require __DIR__ . "/../Boot/Config.php";
+//require __DIR__ . "/../Boot/Config.php";
 
 use \PDO;
 use \PDOException;
